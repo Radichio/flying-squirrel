@@ -199,17 +199,17 @@ export default function Booking() {
                 <div>
                   <label style={{ fontSize: '11px', color: 'rgba(240,236,228,0.4)', letterSpacing: '0.08em', display: 'block', marginBottom: '6px' }}>PACKAGE</label>
                   <select value={form.pkg} onChange={e => setForm(p => ({ ...p, pkg: e.target.value }))}
-                    style={{ ...inputStyle('pkg'), cursor: 'pointer' }}>
-                    <optgroup label="Residential">
-                      <option value="Scout">Scout — $249</option>
-                      <option value="Soar">Soar — $449</option>
-                      <option value="Nest Builder">Nest Builder — $699</option>
+                    style={{ ...inputStyle('pkg'), cursor: 'pointer', background: '#1a1a1a', color: '#f0ece4' }}>
+                    <optgroup label="── Residential ──" style={{ color: '#c8a96e', background: '#1a1a1a' }}>
+                      <option value="Scout" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Scout — $249</option>
+                      <option value="Soar" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Soar — $449</option>
+                      <option value="Nest Builder" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Nest Builder — $699</option>
                     </optgroup>
-                    <optgroup label="Commercial">
-                      <option value="Commercial Real Estate">Commercial Real Estate — from $1,000</option>
-                      <option value="Construction Documentation">Construction Documentation — from $2,500/mo</option>
-                      <option value="Architecture & Design">Architecture & Design — from $800</option>
-                      <option value="Territory Retainer">Territory Retainer — from $1,500</option>
+                    <optgroup label="── Commercial ──" style={{ color: '#c8a96e', background: '#1a1a1a' }}>
+                      <option value="Commercial Real Estate" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Commercial Real Estate — from $1,000</option>
+                      <option value="Construction Documentation" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Construction Documentation — from $2,500/mo</option>
+                      <option value="Architecture & Design" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Architecture & Design — from $800</option>
+                      <option value="Territory Retainer" style={{ color: '#f0ece4', background: '#1a1a1a' }}>Territory Retainer — from $1,500</option>
                     </optgroup>
                   </select>
                 </div>

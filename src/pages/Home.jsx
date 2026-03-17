@@ -238,7 +238,7 @@ export default function Home() {
   const btnInactive = { ...btnBase, background: 'rgba(255,255,255,0.06)', color: 'rgba(240,236,228,0.65)', border: '0.5px solid rgba(240,236,228,0.15)' }
 
   const differentiators = [
-    { title: 'Designer first. Pilot second.', body: 'Most drone operators hand over raw files and call it done. Matt is a professional graphic designer who also flies. Every deliverable is finished, branded, and ready to use before it leaves his hands.' },
+    { title: 'Designer first. Pilot second.', body: 'Matt spent fifteen years as a professional graphic designer before earning his Part 107. He does not just capture footage — he delivers a finished, branded product. Every file is edited, formatted, and ready to use before it leaves his hands.' },
     { title: '24-hour turnaround. Guaranteed.', body: 'Shoot in the morning, fully edited and delivered to your private portal by 9am the next day. Every Soar package and above. No exceptions.' },
     { title: 'Branded on every asset.', body: 'Logo, contact information, and headshot composited into every photo and video. Post directly from the download link. Nobody else in this market offers this as a standard inclusion.' },
     { title: 'Weather managed proactively.', body: 'Matt monitors conditions 72 hours out and contacts you before you have to ask. A reschedule is offered before the morning of — never a last-minute cancellation.' },
@@ -264,9 +264,8 @@ export default function Home() {
         <HeroBackground />
         <div style={{ position: 'relative', zIndex: 2, background: 'rgba(13,13,13,0.5)', backdropFilter: 'blur(3px)', borderRadius: '12px', padding: '28px 36px', maxWidth: '520px', margin: '0 auto' }}>
           <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.22em', marginBottom: '22px' }}>AERIAL · DESIGN · DELIVERY</p>
-          <h1 style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', lineHeight: 1.15, color: 'var(--linen)', marginBottom: '16px' }}>
-            Aerial media for real estate,<br />development{' '}
-            <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>&amp; architecture.</em>
+          <h1 style={{ fontSize: 'clamp(26px, 3vw, 38px)', lineHeight: 1.2, color: 'var(--linen)', marginBottom: '16px' }}>
+            Aerial media for<br />real estate, development<br /><em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>&amp; architecture.</em>
           </h1>
           <p style={{ fontSize: '15px', fontWeight: 300, color: 'var(--linen-dim)', lineHeight: 1.65, maxWidth: '420px', marginBottom: '28px' }}>
             Cinematic photography and video for agents, brokers, developers, and designers — branded, formatted, and delivered in 24 hours. Serving Lynchburg, VA and surrounding areas.
