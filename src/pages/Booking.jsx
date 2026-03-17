@@ -200,10 +200,17 @@ export default function Booking() {
                   <label style={{ fontSize: '11px', color: 'rgba(240,236,228,0.4)', letterSpacing: '0.08em', display: 'block', marginBottom: '6px' }}>PACKAGE</label>
                   <select value={form.pkg} onChange={e => setForm(p => ({ ...p, pkg: e.target.value }))}
                     style={{ ...inputStyle('pkg'), cursor: 'pointer' }}>
-                    <option value="Scout">Scout — $249</option>
-                    <option value="Soar">Soar — $449</option>
-                    <option value="Nest Builder">Nest Builder — $699</option>
-                    <option value="Territory">Territory — Contact for pricing</option>
+                    <optgroup label="Residential">
+                      <option value="Scout">Scout — $249</option>
+                      <option value="Soar">Soar — $449</option>
+                      <option value="Nest Builder">Nest Builder — $699</option>
+                    </optgroup>
+                    <optgroup label="Commercial">
+                      <option value="Commercial Real Estate">Commercial Real Estate — from $1,000</option>
+                      <option value="Construction Documentation">Construction Documentation — from $2,500/mo</option>
+                      <option value="Architecture & Design">Architecture & Design — from $800</option>
+                      <option value="Territory Retainer">Territory Retainer — from $1,500</option>
+                    </optgroup>
                   </select>
                 </div>
               </div>

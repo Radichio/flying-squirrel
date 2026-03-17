@@ -186,6 +186,76 @@ export default function Packages() {
         </div>
       </section>
 
+
+      {/* COMMERCIAL SERVICES */}
+      <section style={{ padding: '72px 24px', background: 'var(--midnight)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px', textAlign: 'center' }}>COMMERCIAL SERVICES</p>
+          <h2 style={{ fontSize: 'clamp(26px, 3vw, 36px)', color: 'var(--linen)', marginBottom: '12px', textAlign: 'center', lineHeight: 1.2 }}>Beyond the listing photo.</h2>
+          <p style={{ fontSize: '15px', color: 'var(--linen-dim)', maxWidth: '500px', margin: '0 auto 48px', textAlign: 'center', lineHeight: 1.7 }}>
+            For commercial brokers, developers, and architecture firms who need a finished product — not just a file.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '32px' }}>
+            {[
+              {
+                label: 'Commercial real estate',
+                price: '$1,000–$2,500',
+                period: 'per shoot',
+                items: ['CoStar and LoopNet ready image sets', 'Investor deck and offering memorandum assets', 'Property boundary overlays', 'High-altitude context shots — highway access, anchor tenants, trade area density', 'Branded and unbranded versions'],
+              },
+              {
+                label: 'Construction documentation',
+                price: '$2,500+',
+                period: 'per month',
+                items: ['Monthly progress flyovers at consistent framing', 'Before / after comparison sets', 'Stakeholder-ready PDF progress reports', 'Permanent portal archive organised by date', '3D photogrammetry models on request'],
+              },
+              {
+                label: 'Architecture & design',
+                price: '$800–$1,500',
+                period: 'per project',
+                items: ['Editorial-quality portfolio aerials', 'Site context and massing documentation', 'Landscape and environment relationship shots', 'Pre-construction site surveys', 'Shot by a designer who understands the brief'],
+              },
+            ].map((svc, i) => (
+              <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '0.5px solid rgba(240,236,228,0.1)', borderRadius: '12px', padding: '28px' }}>
+                <p style={{ fontSize: '11px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.1em', marginBottom: '6px' }}>{svc.label.toUpperCase()}</p>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '18px' }}>
+                  <p style={{ fontFamily: 'Georgia, serif', fontSize: '22px', color: 'var(--linen)', margin: 0 }}>{svc.price}</p>
+                  <p style={{ fontSize: '11px', color: 'rgba(240,236,228,0.35)', margin: 0 }}>{svc.period}</p>
+                </div>
+                <div style={{ borderTop: '0.5px solid rgba(240,236,228,0.08)', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {svc.items.map((item, j) => (
+                    <div key={j} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gilt)', opacity: 0.6, flexShrink: 0, marginTop: '5px' }} />
+                      <span style={{ fontSize: '13px', color: 'rgba(240,236,228,0.65)', lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <a href="/booking" style={{ display: 'inline-block', marginTop: '20px', fontSize: '12px', fontWeight: 500, color: 'var(--gilt)', border: '0.5px solid rgba(200,169,110,0.35)', borderRadius: '6px', padding: '8px 18px', textDecoration: 'none', letterSpacing: '0.04em' }}>Request a consultation</a>
+              </div>
+            ))}
+          </div>
+          {/* Territory */}
+          <div style={{ background: 'rgba(200,169,110,0.05)', border: '0.5px solid rgba(200,169,110,0.2)', borderRadius: '14px', padding: '32px 36px', display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: '220px' }}>
+              <p style={{ fontSize: '11px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.1em', marginBottom: '8px' }}>TERRITORY — RETAINER</p>
+              <p style={{ fontFamily: 'Georgia, serif', fontSize: '26px', color: 'var(--linen)', marginBottom: '4px' }}>$1,500+</p>
+              <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.4)', marginBottom: '16px' }}>per project or monthly retainer</p>
+              <p style={{ fontSize: '14px', color: 'var(--linen-dim)', lineHeight: 1.7, marginBottom: '20px' }}>
+                For clients who need ongoing aerial documentation. Monthly progress sets, stakeholder reports, and a dedicated portal that becomes a permanent record of your project.
+              </p>
+              <a href="/booking" style={{ display: 'inline-block', background: 'var(--gilt)', color: 'var(--midnight)', borderRadius: '6px', padding: '10px 22px', fontSize: '13px', fontWeight: 500, textDecoration: 'none' }}>Request a consultation</a>
+            </div>
+            <div style={{ flex: 1, minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {['Monthly progress documentation', 'Before / after comparison sets', '3D photogrammetry models', 'Stakeholder-ready PDF reports', 'Architecture portfolio shots', 'Interior design aerial walkthroughs', 'Custom delivery schedule', 'Dedicated project portal'].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gilt)', opacity: 0.6, flexShrink: 0, marginTop: '5px' }} />
+                  <span style={{ fontSize: '13px', color: 'rgba(240,236,228,0.65)', lineHeight: 1.5 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Add-ons */}
       <section style={{ padding: '72px 24px', background: 'var(--charcoal)' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>

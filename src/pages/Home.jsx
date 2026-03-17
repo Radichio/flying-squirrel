@@ -259,13 +259,13 @@ export default function Home() {
       {/* Hero */}
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 24px 60px', textAlign: 'center', position: 'relative', minHeight: '85vh' }}>
         <HeroBackground />
-        <div style={{ position: 'relative', zIndex: 2, background: 'rgba(13,13,13,0.45)', backdropFilter: 'blur(2px)', borderRadius: '16px', padding: '40px 48px', maxWidth: '640px', margin: '0 auto' }}>
+        <div style={{ position: 'relative', zIndex: 2, background: 'rgba(13,13,13,0.5)', backdropFilter: 'blur(3px)', borderRadius: '12px', padding: '28px 36px', maxWidth: '520px', margin: '0 auto' }}>
           <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.22em', marginBottom: '22px' }}>AERIAL · DESIGN · DELIVERY</p>
-          <h1 style={{ fontSize: 'clamp(36px, 5vw, 58px)', lineHeight: 1.1, color: 'var(--linen)', marginBottom: '20px' }}>
+          <h1 style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', lineHeight: 1.15, color: 'var(--linen)', marginBottom: '16px' }}>
             Aerial media for real estate,<br />development{' '}
             <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>&amp; architecture.</em>
           </h1>
-          <p style={{ fontSize: '18px', fontWeight: 300, color: 'var(--linen-dim)', lineHeight: 1.7, maxWidth: '480px', marginBottom: '36px' }}>
+          <p style={{ fontSize: '15px', fontWeight: 300, color: 'var(--linen-dim)', lineHeight: 1.65, maxWidth: '420px', marginBottom: '28px' }}>
             Cinematic photography and video for agents, brokers, developers, and designers — branded, formatted, and delivered in 24 hours. Serving Lynchburg, VA and surrounding areas.
           </p>
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '40px' }}>
