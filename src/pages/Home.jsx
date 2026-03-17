@@ -208,7 +208,10 @@ export default function Home() {
   const [pkg, setPkg] = useState({ name: 'Soar', price: 449 })
   const [addons, setAddons] = useState({})
 
-  const propTypes = ['Residential', 'Condo / townhouse', 'Commercial', 'Land / acreage']
+  const residentialTypes = ['Residential', 'Condo / townhouse', 'Land / acreage']
+  const commercialTypes = ['Commercial property', 'Construction site', 'Architecture / design']
+  const propTypes = [...residentialTypes, ...commercialTypes]
+  const isCommercial = commercialTypes.includes(propType)
   const packages = [{ name: 'Scout', price: 249 }, { name: 'Soar', price: 449 }, { name: 'Nest Builder', price: 699 }]
   const addonList = [
     { name: 'Twilight / golden hour session', price: 75 },
@@ -424,42 +427,80 @@ export default function Home() {
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px', textAlign: 'center' }}>INSTANT PRICING</p>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', textAlign: 'center', marginBottom: '48px', lineHeight: 1.2 }}>Build your shoot</h2>
+
+          {/* Property type */}
           <div style={{ marginBottom: '28px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '12px' }}>PROPERTY TYPE</p>
+            <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '10px' }}>RESIDENTIAL</p>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+              {residentialTypes.map(t => <button key={t} onClick={() => { setPropType(t); setPkg({ name: 'Soar', price: 449 }); setAddons({}) }} style={propType === t ? btnActive : btnInactive}>{t}</button>)}
+            </div>
+            <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '10px', marginTop: '4px' }}>COMMERCIAL</p>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {propTypes.map(t => <button key={t} onClick={() => setPropType(t)} style={propType === t ? btnActive : btnInactive}>{t}</button>)}
+              {commercialTypes.map(t => <button key={t} onClick={() => { setPropType(t); setAddons({}) }} style={propType === t ? btnActive : btnInactive}>{t}</button>)}
             </div>
           </div>
-          <div style={{ marginBottom: '28px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '12px' }}>PACKAGE</p>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {packages.map(p => <button key={p.name} onClick={() => setPkg(p)} style={pkg.name === p.name ? btnActive : btnInactive}>{p.name} — ${p.price}</button>)}
-            </div>
-          </div>
-          <div style={{ marginBottom: '36px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '12px' }}>ADD-ONS</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {addonList.map(a => (
-                <div key={a.name} onClick={() => toggleAddon(a.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 16px', borderRadius: '8px', cursor: 'pointer', background: addons[a.name] ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)', border: `0.5px solid ${addons[a.name] ? 'rgba(200,169,110,0.4)' : 'rgba(240,236,228,0.1)'}` }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '16px', height: '16px', borderRadius: '4px', flexShrink: 0, background: addons[a.name] ? 'var(--gilt)' : 'transparent', border: `0.5px solid ${addons[a.name] ? 'var(--gilt)' : 'rgba(240,236,228,0.25)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {addons[a.name] && <span style={{ fontSize: '10px', color: 'var(--midnight)', fontWeight: 700, lineHeight: 1 }}>✓</span>}
-                    </div>
-                    <span style={{ fontSize: '14px', color: addons[a.name] ? 'var(--linen)' : 'rgba(240,236,228,0.7)' }}>{a.name}</span>
-                  </div>
-                  <span style={{ fontSize: '13px', color: addons[a.name] ? 'var(--gilt)' : 'rgba(240,236,228,0.45)', fontWeight: 500 }}>+${a.price}</span>
+
+          {/* Residential flow */}
+          {!isCommercial && (
+            <>
+              <div style={{ marginBottom: '28px' }}>
+                <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '12px' }}>PACKAGE</p>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {packages.map(p => <button key={p.name} onClick={() => setPkg(p)} style={pkg.name === p.name ? btnActive : btnInactive}>{p.name} — ${p.price}</button>)}
                 </div>
-              ))}
+              </div>
+              <div style={{ marginBottom: '36px' }}>
+                <p style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(240,236,228,0.55)', letterSpacing: '0.12em', marginBottom: '12px' }}>ADD-ONS</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {addonList.map(a => (
+                    <div key={a.name} onClick={() => toggleAddon(a.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 16px', borderRadius: '8px', cursor: 'pointer', background: addons[a.name] ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)', border: `0.5px solid ${addons[a.name] ? 'rgba(200,169,110,0.4)' : 'rgba(240,236,228,0.1)'}` }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ width: '16px', height: '16px', borderRadius: '4px', flexShrink: 0, background: addons[a.name] ? 'var(--gilt)' : 'transparent', border: `0.5px solid ${addons[a.name] ? 'var(--gilt)' : 'rgba(240,236,228,0.25)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {addons[a.name] && <span style={{ fontSize: '10px', color: 'var(--midnight)', fontWeight: 700, lineHeight: 1 }}>✓</span>}
+                        </div>
+                        <span style={{ fontSize: '14px', color: addons[a.name] ? 'var(--linen)' : 'rgba(240,236,228,0.7)' }}>{a.name}</span>
+                      </div>
+                      <span style={{ fontSize: '13px', color: addons[a.name] ? 'var(--gilt)' : 'rgba(240,236,228,0.45)', fontWeight: 500 }}>+${a.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{ background: 'var(--midnight)', borderRadius: '12px', padding: '24px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', border: '0.5px solid var(--gilt-faint)' }}>
+                <div>
+                  <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.5)', marginBottom: '4px', letterSpacing: '0.06em' }}>{pkg.name} — {propType}</p>
+                  <p style={{ fontFamily: 'Georgia, serif', fontSize: '42px', color: 'var(--linen)', lineHeight: 1 }}>${total}</p>
+                  <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.4)', marginTop: '4px' }}>24-hour delivery · Branded included</p>
+                </div>
+                <a href="/booking" style={{ background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '8px', padding: '14px 28px', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' }}>Book this shoot</a>
+              </div>
+            </>
+          )}
+
+          {/* Commercial flow */}
+          {isCommercial && (
+            <div style={{ background: 'var(--midnight)', borderRadius: '12px', padding: '32px', border: '0.5px solid rgba(200,169,110,0.2)' }}>
+              <p style={{ fontSize: '11px', color: 'var(--gilt)', letterSpacing: '0.12em', marginBottom: '16px' }}>
+                {propType === 'Commercial property' && 'COMMERCIAL REAL ESTATE'}
+                {propType === 'Construction site' && 'CONSTRUCTION DOCUMENTATION'}
+                {propType === 'Architecture / design' && 'ARCHITECTURE & DESIGN'}
+              </p>
+              <p style={{ fontFamily: 'Georgia, serif', fontSize: '32px', color: 'var(--linen)', marginBottom: '8px', lineHeight: 1 }}>
+                {propType === 'Commercial property' && 'From $1,000'}
+                {propType === 'Construction site' && 'From $2,500 / month'}
+                {propType === 'Architecture / design' && 'From $800'}
+              </p>
+              <p style={{ fontSize: '14px', color: 'var(--linen-dim)', lineHeight: 1.7, marginBottom: '24px', maxWidth: '420px' }}>
+                {propType === 'Commercial property' && 'CoStar and LoopNet ready image sets, investor deck assets, property boundary overlays, and high-altitude context shots. Pricing based on property size and scope.'}
+                {propType === 'Construction site' && 'Monthly progress flyovers, before/after comparison sets, stakeholder PDF reports, and a permanent portal archive. Scope-based retainer pricing.'}
+                {propType === 'Architecture / design' && 'Editorial-quality portfolio aerials showing site context, massing, and landscape relationship — shot by a designer who understands the brief.'}
+              </p>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <a href="/booking" style={{ background: 'var(--gilt)', color: 'var(--midnight)', borderRadius: '8px', padding: '14px 28px', fontSize: '14px', fontWeight: 500, textDecoration: 'none', display: 'inline-block' }}>Request a consultation</a>
+                <a href="/packages" style={{ background: 'transparent', color: 'var(--linen)', border: '0.5px solid rgba(240,236,228,0.2)', borderRadius: '8px', padding: '14px 24px', fontSize: '14px', textDecoration: 'none', display: 'inline-block' }}>See full details</a>
+              </div>
             </div>
-          </div>
-          <div style={{ background: 'var(--midnight)', borderRadius: '12px', padding: '24px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', border: '0.5px solid var(--gilt-faint)' }}>
-            <div>
-              <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.5)', marginBottom: '4px', letterSpacing: '0.06em' }}>{pkg.name} — {propType}</p>
-              <p style={{ fontFamily: 'Georgia, serif', fontSize: '42px', color: 'var(--linen)', lineHeight: 1 }}>${total}</p>
-              <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.4)', marginTop: '4px' }}>24-hour delivery · Branded included</p>
-            </div>
-            <a href="/booking" style={{ background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '8px', padding: '14px 28px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' }}>Book this shoot</a>
-          </div>
+          )}
+
         </div>
       </section>
 
