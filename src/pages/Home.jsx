@@ -463,26 +463,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RESIDENTIAL PACKAGES */}
-      <section style={{ padding: '72px 24px', textAlign: 'center', background: 'var(--midnight)' }}>
-        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px' }}>RESIDENTIAL PACKAGES</p>
-        <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '12px' }}>What we deliver</h2>
-        <p style={{ fontSize: '15px', color: 'var(--linen-dim)', maxWidth: '440px', margin: '0 auto 40px' }}>Three tiers for residential listings. Every package includes the commercial use license and private download portal.</p>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '560px', margin: '0 auto' }}>
-          {[
-            { name: 'Scout', price: '$249', desc: 'MLS-ready aerial photos. 48-hr delivery.' },
-            { name: 'Soar', price: '$449', desc: 'Photos, video, social cuts. 24-hr.', featured: true },
-            { name: 'Nest Builder', price: '$699', desc: 'Twilight session + branded one-pager.' },
-          ].map(p => (
-            <div key={p.name} style={{ background: 'rgba(255,255,255,0.04)', border: `0.5px solid ${p.featured ? 'rgba(200,169,110,0.5)' : 'rgba(240,236,228,0.1)'}`, borderRadius: '10px', padding: '22px', textAlign: 'left', width: '155px' }}>
-              <p style={{ fontSize: '11px', fontWeight: 500, color: 'var(--gilt)', marginBottom: '7px', letterSpacing: '0.04em' }}>{p.name}{p.featured ? ' — Popular' : ''}</p>
-              <p style={{ fontFamily: 'Georgia, serif', fontSize: '24px', color: 'var(--linen)', marginBottom: '8px' }}>{p.price}</p>
-              <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.5)', lineHeight: 1.5 }}>{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* TERRITORY — COMMERCIAL FLAGSHIP */}
       <section style={{ padding: '80px 24px', background: 'var(--charcoal)' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
