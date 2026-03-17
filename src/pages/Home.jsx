@@ -3,39 +3,19 @@ import { useState, useRef, useCallback } from 'react'
 function HeroBackground() {
   return (
     <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0 }}>
-      {/* YouTube video background — swap video ID for Matt's own footage when ready */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
         <iframe
           src="https://www.youtube.com/embed/Q33t6phnQaI?autoplay=1&mute=1&loop=1&playlist=Q33t6phnQaI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1"
           allow="autoplay; encrypted-media"
-          style={{
-            position: 'absolute',
-            top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '177.78vh',
-            height: '56.25vw',
-            minWidth: '100%',
-            minHeight: '100%',
-            border: 'none',
-            opacity: 0.85,
-          }}
+          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', border: 'none', opacity: 0.85 }}
         />
       </div>
-
-      {/* Dark overlay for text readability */}
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(13,13,13,0.25) 0%, rgba(13,13,13,0.05) 40%, rgba(13,13,13,0.55) 100%)' }} />
-
-      {/* Gilt vignette edges */}
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 50%, rgba(13,13,13,0.45) 100%)' }} />
-
-      {/* HUD corner brackets */}
       <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
         <g opacity="0.35" fill="none" stroke="#c8a96e" strokeWidth="0.8">
-          <path d="M24,24 L24,52 L52,52"/>
-          <path d="M24,24 L52,24"/>
-          <path d="M-24,24 L-24,52 L-52,52" transform="translate(100%, 0) scale(-1,1)"/>
-          <path d="M24,676 L24,648 L52,648"/>
-          <path d="M24,676 L52,676"/>
+          <path d="M24,24 L24,52 L52,52"/><path d="M24,24 L52,24"/>
+          <path d="M24,676 L24,648 L52,648"/><path d="M24,676 L52,676"/>
         </g>
         <text x="32" y="692" fontSize="9" fill="#c8a96e" opacity="0.4" fontFamily="monospace">ALT 120m · LYNCHBURG VA</text>
         <text x="32" y="36" fontSize="9" fill="#c8a96e" opacity="0.4" fontFamily="monospace">PART 107 · 4K RAW</text>
@@ -51,16 +31,14 @@ function BeforeAfterSlider() {
   const updatePosition = useCallback((clientX) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
-    const pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100))
-    setPosition(pct)
+    setPosition(Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100)))
   }, [])
   const onMouseDown = () => setDragging(true)
   const onMouseUp = () => setDragging(false)
   const onMouseMove = (e) => { if (dragging) updatePosition(e.clientX) }
   const onTouchMove = (e) => updatePosition(e.touches[0].clientX)
-  const onClick = (e) => updatePosition(e.clientX)
   return (
-    <div ref={containerRef} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove} onMouseLeave={onMouseUp} onTouchMove={onTouchMove}
+    <div ref={containerRef} onClick={e => updatePosition(e.clientX)} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove} onMouseLeave={onMouseUp} onTouchMove={onTouchMove}
       style={{ position: 'relative', width: '100%', maxWidth: '700px', margin: '0 auto', borderRadius: '12px', overflow: 'hidden', cursor: 'ew-resize', userSelect: 'none', aspectRatio: '16/9' }}>
       <div style={{ position: 'absolute', inset: 0 }}>
         <svg viewBox="0 0 700 394" width="100%" height="100%" style={{ position: 'absolute', inset: 0 }}>
@@ -100,8 +78,8 @@ function BeforeAfterSlider() {
           <span style={{ fontSize: '13px', color: '#333', letterSpacing: '-2px' }}>◀▶</span>
         </div>
       </div>
-      <div style={{ position: 'absolute', bottom: '14px', left: '14px', fontSize: '11px', fontWeight: 500, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '3px 10px', borderRadius: '99px', letterSpacing: '0.06em' }}>AERIAL</div>
-      <div style={{ position: 'absolute', bottom: '14px', right: '14px', fontSize: '11px', fontWeight: 500, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '3px 10px', borderRadius: '99px', letterSpacing: '0.06em' }}>STREET</div>
+      <div style={{ position: 'absolute', bottom: '14px', left: '14px', fontSize: '11px', fontWeight: 500, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '3px 10px', borderRadius: '99px' }}>AERIAL</div>
+      <div style={{ position: 'absolute', bottom: '14px', right: '14px', fontSize: '11px', fontWeight: 500, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '3px 10px', borderRadius: '99px' }}>STREET</div>
     </div>
   )
 }
@@ -120,10 +98,8 @@ function SocialPreview() {
         <rect width="300" height="300" fill="#4a8c3a"/>
         <rect x="0" y="90" width="300" height="20" fill="#666"/>
         <rect x="140" y="0" width="20" height="300" fill="#666"/>
-        <rect x="20" y="10" width="105" height="72" fill="#6aaa4a" rx="3"/>
-        <rect x="175" y="10" width="105" height="72" fill="#6aaa4a" rx="3"/>
-        <rect x="20" y="120" width="105" height="72" fill="#6aaa4a" rx="3"/>
-        <rect x="175" y="120" width="105" height="72" fill="#6aaa4a" rx="3"/>
+        <rect x="20" y="10" width="105" height="72" fill="#6aaa4a" rx="3"/><rect x="175" y="10" width="105" height="72" fill="#6aaa4a" rx="3"/>
+        <rect x="20" y="120" width="105" height="72" fill="#6aaa4a" rx="3"/><rect x="175" y="120" width="105" height="72" fill="#6aaa4a" rx="3"/>
         <rect x="35" y="20" width="75" height="52" fill="#8b4a2a" rx="2" opacity=".8"/>
         <rect x="190" y="20" width="75" height="52" fill="#6a3a22" rx="2" opacity=".8"/>
         <rect x="35" y="130" width="75" height="52" fill="#7a4020" rx="2" opacity=".75"/>
@@ -146,7 +122,7 @@ function SocialPreview() {
     <div style={{ textAlign: 'center' }}>
       <div style={{ display: 'inline-flex', gap: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '4px', marginBottom: '36px' }}>
         {formats.map(f => (
-          <button key={f.id} onClick={() => setActive(f.id)} style={{ padding: '8px 18px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 500, letterSpacing: '0.03em', background: active === f.id ? 'var(--gilt)' : 'transparent', color: active === f.id ? 'var(--midnight)' : 'rgba(240,236,228,0.6)', transition: 'all 0.15s' }}>{f.label}</button>
+          <button key={f.id} onClick={() => setActive(f.id)} style={{ padding: '8px 18px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 500, background: active === f.id ? 'var(--gilt)' : 'transparent', color: active === f.id ? 'var(--midnight)' : 'rgba(240,236,228,0.6)', transition: 'all 0.15s' }}>{f.label}</button>
         ))}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
@@ -164,7 +140,7 @@ function SocialPreview() {
             { fmt: 'Instagram feed', spec: '1080×1080 · square' },
             { fmt: 'Reels + Stories', spec: '1080×1920 · vertical' },
             { fmt: 'YouTube / MLS', spec: '1920×1080 · landscape' },
-            { fmt: 'Agent-branded', spec: 'Logo + headshot composited' },
+            { fmt: 'Client-branded', spec: 'Logo + contact composited' },
           ].map(item => (
             <div key={item.fmt} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '12px' }}>
               <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gilt)', opacity: 0.7, flexShrink: 0, marginTop: '5px' }} />
@@ -185,7 +161,7 @@ function StatusTracker() {
   const stages = [
     { id: 0, label: 'Booked', desc: 'Shoot confirmed and on the calendar' },
     { id: 1, label: 'Confirmed', desc: 'Weather checked, details locked in' },
-    { id: 2, label: 'Shoot day', desc: 'Matt is in the air right now' },
+    { id: 2, label: 'Shoot day', desc: 'In the air right now' },
     { id: 3, label: 'Editing', desc: 'Photos and video in post-production' },
     { id: 4, label: 'Ready', desc: 'Your files are ready to download' },
   ]
@@ -204,7 +180,7 @@ function StatusTracker() {
       <div style={{ display: 'flex', marginBottom: '36px' }}>
         {stages.map(s => (
           <div key={s.id} style={{ flex: 1, textAlign: 'center' }}>
-            <p style={{ fontSize: '10px', fontWeight: 500, letterSpacing: '0.08em', color: s.id === active ? 'var(--gilt)' : s.id < active ? 'rgba(200,169,110,0.6)' : 'rgba(240,236,228,0.3)', margin: 0, transition: 'color 0.2s' }}>{s.label.toUpperCase()}</p>
+            <p style={{ fontSize: '10px', fontWeight: 500, letterSpacing: '0.08em', color: s.id === active ? 'var(--gilt)' : s.id < active ? 'rgba(200,169,110,0.6)' : 'rgba(240,236,228,0.3)', margin: 0 }}>{s.label.toUpperCase()}</p>
           </div>
         ))}
       </div>
@@ -219,7 +195,7 @@ function StatusTracker() {
           <button onClick={() => setActive(Math.min(4, active + 1))} disabled={active === 4} style={{ padding: '8px 16px', borderRadius: '6px', border: 'none', background: active === 4 ? 'rgba(200,169,110,0.2)' : 'var(--gilt)', color: active === 4 ? 'rgba(200,169,110,0.4)' : 'var(--midnight)', cursor: active === 4 ? 'default' : 'pointer', fontSize: '12px', fontWeight: 500 }}>Next →</button>
         </div>
       </div>
-      <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.35)', textAlign: 'center', marginTop: '16px', letterSpacing: '0.04em' }}>Clients get a private link showing their live status — no login needed</p>
+      <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.35)', textAlign: 'center', marginTop: '16px' }}>Every client gets a private link — no login needed</p>
     </div>
   )
 }
@@ -233,11 +209,7 @@ export default function Home() {
   const [addons, setAddons] = useState({})
 
   const propTypes = ['Residential', 'Condo / townhouse', 'Commercial', 'Land / acreage']
-  const packages = [
-    { name: 'Scout', price: 249 },
-    { name: 'Soar', price: 449 },
-    { name: 'Nest Builder', price: 699 },
-  ]
+  const packages = [{ name: 'Scout', price: 249 }, { name: 'Soar', price: 449 }, { name: 'Nest Builder', price: 699 }]
   const addonList = [
     { name: 'Twilight / golden hour session', price: 75 },
     { name: 'Designed property one-pager PDF', price: 50 },
@@ -263,11 +235,11 @@ export default function Home() {
   const btnInactive = { ...btnBase, background: 'rgba(255,255,255,0.06)', color: 'rgba(240,236,228,0.65)', border: '0.5px solid rgba(240,236,228,0.15)' }
 
   const differentiators = [
-    { title: 'Designer first. Pilot second.', body: 'Most drone operators hand over raw files and call it done. Matt is a professional graphic designer who also flies. Every deliverable is finished, branded, and ready to post before it leaves his hands.' },
-    { title: '24-hour turnaround. Guaranteed.', body: 'Agents lose listings when they cannot move fast. Shoot in the morning, fully edited and delivered to your private portal by 9am the next day. No exceptions, no excuses.' },
-    { title: 'Agent-branded on every shot.', body: 'Your headshot, your logo, your contact info composited into every photo and video. Post directly from your phone. Nobody else in this market offers this as a standard inclusion.' },
-    { title: 'Weather managed proactively.', body: 'Matt monitors conditions 72 hours out and contacts you before you have to ask. If the forecast turns, a reschedule is offered before the morning of — never a last-minute text cancellation.' },
-    { title: 'Social cuts included as standard.', body: 'Instagram feed, Reels, Stories, YouTube — every format pre-cut and ready. Competitors charge $75–150 extra for this. In every Soar package it is simply included.' },
+    { title: 'Designer first. Pilot second.', body: 'Most drone operators hand over raw files and call it done. Matt is a professional graphic designer who also flies. Every deliverable is finished, branded, and ready to use before it leaves his hands.' },
+    { title: '24-hour turnaround. Guaranteed.', body: 'Shoot in the morning, fully edited and delivered to your private portal by 9am the next day. Every Soar package and above. No exceptions.' },
+    { title: 'Branded on every asset.', body: 'Logo, contact information, and headshot composited into every photo and video. Post directly from the download link. Nobody else in this market offers this as a standard inclusion.' },
+    { title: 'Weather managed proactively.', body: 'Matt monitors conditions 72 hours out and contacts you before you have to ask. A reschedule is offered before the morning of — never a last-minute cancellation.' },
+    { title: 'Every format, ready to use.', body: 'Social cuts, MLS resolution, print resolution, CoStar-ready sets — every package delivers the right file for the right platform, named and organised. Nothing to resize, nothing to figure out.' },
   ]
 
   return (
@@ -284,21 +256,21 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero with animated background */}
+      {/* Hero */}
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 24px 60px', textAlign: 'center', position: 'relative', minHeight: '85vh' }}>
         <HeroBackground />
-        <div style={{ position: 'relative', zIndex: 2, background: 'rgba(13,13,13,0.45)', backdropFilter: 'blur(2px)', borderRadius: '16px', padding: '40px 48px', maxWidth: '620px', margin: '0 auto' }}>
+        <div style={{ position: 'relative', zIndex: 2, background: 'rgba(13,13,13,0.45)', backdropFilter: 'blur(2px)', borderRadius: '16px', padding: '40px 48px', maxWidth: '640px', margin: '0 auto' }}>
           <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.22em', marginBottom: '22px' }}>AERIAL · DESIGN · DELIVERY</p>
-          <h1 style={{ fontSize: 'clamp(40px, 6vw, 64px)', lineHeight: 1.1, color: 'var(--linen)', maxWidth: '640px', marginBottom: '24px', textShadow: '0 2px 40px rgba(0,0,0,0.8)' }}>
-            Your listings,<br />seen from{' '}
-            <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>above.</em>
+          <h1 style={{ fontSize: 'clamp(36px, 5vw, 58px)', lineHeight: 1.1, color: 'var(--linen)', marginBottom: '20px' }}>
+            Aerial media for real estate,<br />development{' '}
+            <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>&amp; architecture.</em>
           </h1>
-          <p style={{ fontSize: '19px', fontWeight: 300, color: 'var(--linen-dim)', lineHeight: 1.7, maxWidth: '460px', marginBottom: '36px', textShadow: '0 1px 20px rgba(0,0,0,0.9)' }}>
-            Cinematic aerial photography, agent-branded and social-ready — delivered in 24 hours. Serving Lynchburg, VA and surrounding areas.
+          <p style={{ fontSize: '18px', fontWeight: 300, color: 'var(--linen-dim)', lineHeight: 1.7, maxWidth: '480px', marginBottom: '36px' }}>
+            Cinematic photography and video for agents, brokers, developers, and designers — branded, formatted, and delivered in 24 hours. Serving Lynchburg, VA and surrounding areas.
           </p>
-          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '44px' }}>
-            {['24-hour delivery', 'Agent-branded included', 'Social cuts standard', 'Designer + pilot'].map(item => (
-              <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '13px', color: 'rgba(240,236,228,0.7)', letterSpacing: '0.04em' }}>
+          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '40px' }}>
+            {['24-hour delivery', 'Branded included', 'Every format ready', 'Designer + pilot'].map(item => (
+              <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '13px', color: 'rgba(240,236,228,0.7)' }}>
                 <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gilt)', flexShrink: 0 }} />
                 {item}
               </div>
@@ -309,32 +281,109 @@ export default function Home() {
               <div style={{ display: 'flex', gap: '10px', maxWidth: '440px', width: '100%', marginBottom: '14px', margin: '0 auto 14px' }}>
                 <input type="email" placeholder="your@email.com" value={email} onChange={e => { setEmail(e.target.value); setError(false) }}
                   style={{ flex: 1, background: 'rgba(255,255,255,0.08)', border: `0.5px solid ${error ? 'rgba(224,75,75,0.6)' : 'rgba(200,169,110,0.3)'}`, borderRadius: '6px', padding: '13px 16px', fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: 'var(--linen)', outline: 'none' }} />
-                <button onClick={handleSubmit} style={{ background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '6px', padding: '13px 24px', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap', cursor: 'pointer' }}>Book a shoot</button>
+                <button onClick={handleSubmit} style={{ background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '6px', padding: '13px 24px', fontSize: '14px', fontWeight: 500, whiteSpace: 'nowrap', cursor: 'pointer' }}>Get in touch</button>
               </div>
-              <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.45)', letterSpacing: '0.03em' }}>Full site launching soon — enter your email and Matt will reach out within 24 hours</p>
+              <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.45)' }}>Enter your email and Matt will reach out within 24 hours</p>
             </>
           ) : (
-            <p style={{ fontSize: '15px', color: 'var(--gilt)', letterSpacing: '0.04em' }}>Perfect — Matt will be in touch within 24 hours.</p>
+            <p style={{ fontSize: '15px', color: 'var(--gilt)' }}>Perfect — Matt will be in touch within 24 hours.</p>
           )}
         </div>
-
-        {/* Bottom fade */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px', background: 'linear-gradient(transparent, var(--midnight))', zIndex: 1 }} />
       </main>
 
+      {/* WHO WE SERVE */}
+      <section style={{ padding: '56px 24px', background: 'var(--charcoal)', borderBottom: '0.5px solid rgba(200,169,110,0.1)' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2px' }}>
+          {[
+            { label: 'Residential agents', desc: 'MLS-ready photos, cinematic video, and social cuts — all branded and delivered before your next showing.' },
+            { label: 'Commercial brokers', desc: 'CoStar and LoopNet ready. Investor deck assets. Property boundary overlays. High-altitude context shots.' },
+            { label: 'Construction & development', desc: 'Monthly progress documentation, before/after sets, and stakeholder-ready PDF reports. A permanent aerial record.' },
+            { label: 'Architecture & design', desc: 'Portfolio-quality aerials that show site context, massing, and landscape relationship — shot by a designer.' },
+          ].map((item, i) => (
+            <div key={i} style={{ padding: '24px 28px', borderLeft: i > 0 ? '0.5px solid rgba(240,236,228,0.07)' : 'none' }}>
+              <p style={{ fontSize: '13px', fontWeight: 500, color: 'var(--gilt)', marginBottom: '8px', letterSpacing: '0.04em' }}>{item.label}</p>
+              <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.55)', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* BEFORE / AFTER */}
-      <section style={{ padding: '72px 24px', background: 'var(--charcoal)', textAlign: 'center' }}>
+      <section style={{ padding: '72px 24px', background: 'var(--midnight)', textAlign: 'center' }}>
         <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px' }}>THE DIFFERENCE</p>
-        <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '16px', lineHeight: 1.2 }}>See what agents are missing</h2>
+        <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '16px', lineHeight: 1.2 }}>See what you've been missing</h2>
         <p style={{ fontSize: '16px', color: 'var(--linen-dim)', maxWidth: '440px', margin: '0 auto 40px' }}>Drag the handle to compare street-level photography with what Flying Squirrel delivers.</p>
         <BeforeAfterSlider />
       </section>
 
+      {/* COMMERCIAL SERVICES */}
+      <section style={{ padding: '72px 24px', background: 'var(--charcoal)' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
+          <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px', textAlign: 'center' }}>COMMERCIAL SERVICES</p>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '16px', lineHeight: 1.2, textAlign: 'center' }}>Beyond the listing photo.</h2>
+          <p style={{ fontSize: '16px', color: 'var(--linen-dim)', maxWidth: '520px', margin: '0 auto 52px', textAlign: 'center', lineHeight: 1.7 }}>
+            Flying Squirrel works with commercial brokers, developers, and architecture firms who need more than a residential drone operator can deliver.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+            {[
+              {
+                label: 'Commercial real estate',
+                price: '$1,000–$2,500',
+                items: [
+                  'CoStar and LoopNet ready image sets',
+                  'Investor deck and offering memorandum assets',
+                  'Property boundary overlays',
+                  'High-altitude context shots — highway access, anchor tenants, trade area',
+                  'Branded and unbranded versions',
+                ]
+              },
+              {
+                label: 'Construction documentation',
+                price: '$2,500+ / month',
+                items: [
+                  'Monthly progress flyovers at consistent framing',
+                  'Before / after comparison sets',
+                  'Stakeholder-ready PDF progress reports',
+                  'Permanent portal archive by date',
+                  '3D photogrammetry models on request',
+                ]
+              },
+              {
+                label: 'Architecture & design',
+                price: '$800–$1,500',
+                items: [
+                  'Editorial-quality portfolio aerials',
+                  'Site context and massing documentation',
+                  'Landscape and environment relationship shots',
+                  'Pre-construction site surveys',
+                  'Shot by a designer who understands the brief',
+                ]
+              },
+            ].map((svc, i) => (
+              <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '0.5px solid rgba(240,236,228,0.1)', borderRadius: '12px', padding: '28px' }}>
+                <p style={{ fontSize: '11px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.1em', marginBottom: '6px' }}>{svc.label.toUpperCase()}</p>
+                <p style={{ fontFamily: 'Georgia, serif', fontSize: '18px', color: 'var(--linen)', marginBottom: '18px' }}>{svc.price}</p>
+                <div style={{ borderTop: '0.5px solid rgba(240,236,228,0.08)', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {svc.items.map((item, j) => (
+                    <div key={j} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gilt)', opacity: 0.6, flexShrink: 0, marginTop: '5px' }} />
+                      <span style={{ fontSize: '13px', color: 'rgba(240,236,228,0.65)', lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <a href="/booking" style={{ display: 'inline-block', marginTop: '20px', fontSize: '12px', fontWeight: 500, color: 'var(--gilt)', border: '0.5px solid rgba(200,169,110,0.35)', borderRadius: '6px', padding: '8px 18px', textDecoration: 'none', letterSpacing: '0.04em' }}>Request a consultation</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* SOCIAL PREVIEW */}
       <section style={{ padding: '72px 24px', background: 'var(--midnight)', textAlign: 'center' }}>
-        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px' }}>READY TO POST</p>
+        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px' }}>READY TO USE</p>
         <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '16px', lineHeight: 1.2 }}>Every format. Delivered.</h2>
-        <p style={{ fontSize: '16px', color: 'var(--linen-dim)', maxWidth: '440px', margin: '0 auto 48px' }}>Every Soar and above package includes cuts pre-formatted for every platform. Agent-branded and ready to post straight from their phone.</p>
+        <p style={{ fontSize: '16px', color: 'var(--linen-dim)', maxWidth: '440px', margin: '0 auto 48px' }}>Every Soar and above package includes cuts pre-formatted for every platform. Branded and ready to use straight from the download link.</p>
         <SocialPreview />
       </section>
 
@@ -352,7 +401,7 @@ export default function Home() {
           <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px', textAlign: 'center' }}>WHY FLYING SQUIRREL</p>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '16px', lineHeight: 1.2, textAlign: 'center' }}>Not just a drone pilot.</h2>
           <p style={{ fontSize: '17px', color: 'var(--linen-dim)', maxWidth: '480px', margin: '0 auto 52px', textAlign: 'center', lineHeight: 1.7 }}>
-            Most pilots learned Lightroom after they got their Part 107. Matt is a professional designer who learned to fly.
+            Most pilots learned Lightroom after they got their Part 107. Matt is a professional graphic designer who learned to fly.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {differentiators.map((d, i) => (
@@ -407,25 +456,25 @@ export default function Home() {
             <div>
               <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.5)', marginBottom: '4px', letterSpacing: '0.06em' }}>{pkg.name} — {propType}</p>
               <p style={{ fontFamily: 'Georgia, serif', fontSize: '42px', color: 'var(--linen)', lineHeight: 1 }}>${total}</p>
-              <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.4)', marginTop: '4px' }}>24-hour delivery · Agent-branded included</p>
+              <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.4)', marginTop: '4px' }}>24-hour delivery · Branded included</p>
             </div>
-            <button style={{ background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '8px', padding: '14px 28px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap' }}>Book this shoot</button>
+            <a href="/booking" style={{ background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '8px', padding: '14px 28px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap', textDecoration: 'none', display: 'inline-block' }}>Book this shoot</a>
           </div>
         </div>
       </section>
 
-      {/* Package cards */}
+      {/* RESIDENTIAL PACKAGES */}
       <section style={{ padding: '72px 24px', textAlign: 'center', background: 'var(--midnight)' }}>
-        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px' }}>PACKAGES</p>
-        <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '48px' }}>What we deliver</h2>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '660px', margin: '0 auto' }}>
+        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '12px' }}>RESIDENTIAL PACKAGES</p>
+        <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: 'var(--linen)', marginBottom: '12px' }}>What we deliver</h2>
+        <p style={{ fontSize: '15px', color: 'var(--linen-dim)', maxWidth: '440px', margin: '0 auto 40px' }}>Three tiers for residential listings. Every package includes the commercial use license and private download portal.</p>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '560px', margin: '0 auto' }}>
           {[
             { name: 'Scout', price: '$249', desc: 'MLS-ready aerial photos. 48-hr delivery.' },
             { name: 'Soar', price: '$449', desc: 'Photos, video, social cuts. 24-hr.', featured: true },
             { name: 'Nest Builder', price: '$699', desc: 'Twilight session + branded one-pager.' },
-            { name: 'Territory', price: '$1,500+', desc: 'Construction, architecture, retainers.' },
           ].map(p => (
-            <div key={p.name} style={{ background: 'rgba(255,255,255,0.04)', border: `0.5px solid ${p.featured ? 'rgba(200,169,110,0.5)' : 'rgba(240,236,228,0.1)'}`, borderRadius: '10px', padding: '22px', textAlign: 'left', width: '145px' }}>
+            <div key={p.name} style={{ background: 'rgba(255,255,255,0.04)', border: `0.5px solid ${p.featured ? 'rgba(200,169,110,0.5)' : 'rgba(240,236,228,0.1)'}`, borderRadius: '10px', padding: '22px', textAlign: 'left', width: '155px' }}>
               <p style={{ fontSize: '11px', fontWeight: 500, color: 'var(--gilt)', marginBottom: '7px', letterSpacing: '0.04em' }}>{p.name}{p.featured ? ' — Popular' : ''}</p>
               <p style={{ fontFamily: 'Georgia, serif', fontSize: '24px', color: 'var(--linen)', marginBottom: '8px' }}>{p.price}</p>
               <p style={{ fontSize: '12px', color: 'rgba(240,236,228,0.5)', lineHeight: 1.5 }}>{p.desc}</p>
@@ -434,18 +483,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TERRITORY — COMMERCIAL FLAGSHIP */}
+      <section style={{ padding: '80px 24px', background: 'var(--charcoal)' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '260px' }}>
+            <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '14px' }}>COMMERCIAL · CONSTRUCTION · ARCHITECTURE</p>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 42px)', color: 'var(--linen)', lineHeight: 1.15, marginBottom: '20px', fontWeight: 400 }}>
+              Territory.<br />
+              <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>For clients who need more.</em>
+            </h2>
+            <p style={{ fontSize: '16px', color: 'var(--linen-dim)', lineHeight: 1.75, marginBottom: '28px' }}>
+              Territory is Flying Squirrel's ongoing documentation and retainer service. Monthly progress sets, stakeholder reports, and a dedicated portal that becomes a permanent record of your project.
+            </p>
+            <p style={{ fontFamily: 'Georgia, serif', fontSize: '28px', color: 'var(--linen)', marginBottom: '6px' }}>$1,500+</p>
+            <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.4)', marginBottom: '28px' }}>per project or monthly retainer</p>
+            <a href="/booking" style={{ display: 'inline-block', background: 'var(--gilt)', color: 'var(--midnight)', borderRadius: '8px', padding: '14px 28px', fontSize: '14px', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}>Request a consultation</a>
+          </div>
+          <div style={{ flex: 1, minWidth: '220px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {[
+              'Monthly progress documentation',
+              'Before / after comparison sets',
+              '3D photogrammetry models',
+              'Stakeholder-ready PDF reports',
+              'Architecture portfolio shots',
+              'Construction site documentation',
+              'Interior design aerial walkthroughs',
+              'Custom delivery schedule',
+              'Dedicated project portal',
+              'Permanent archive by date',
+            ].map((item, i) => (
+              <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--gilt)', flexShrink: 0, marginTop: '6px' }} />
+                <span style={{ fontSize: '14px', color: 'rgba(240,236,228,0.7)', lineHeight: 1.5 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
-      <section style={{ padding: '96px 24px', background: 'var(--charcoal)', textAlign: 'center' }}>
-        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '16px' }}>READY TO BOOK</p>
+      <section style={{ padding: '96px 24px', background: 'var(--midnight)', textAlign: 'center' }}>
+        <p style={{ fontSize: '10px', fontWeight: 500, color: 'var(--gilt)', letterSpacing: '0.2em', marginBottom: '16px' }}>READY TO START</p>
         <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(32px, 5vw, 54px)', color: 'var(--linen)', marginBottom: '20px', lineHeight: 1.15, fontWeight: 400 }}>
-          Your next listing deserves<br />to be <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>seen.</em>
+          Every project deserves<br />to be <em style={{ color: 'var(--gilt)', fontStyle: 'italic' }}>seen properly.</em>
         </h2>
-        <p style={{ fontSize: '17px', color: 'var(--linen-dim)', maxWidth: '400px', margin: '0 auto 36px', lineHeight: 1.7 }}>
-          Book your shoot in under two minutes. Matt will confirm within the hour.
+        <p style={{ fontSize: '17px', color: 'var(--linen-dim)', maxWidth: '420px', margin: '0 auto 36px', lineHeight: 1.7 }}>
+          Whether it's a listing, a development site, or a long-term documentation contract — it starts with a conversation.
         </p>
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="/booking" style={{ display: 'inline-block', background: 'var(--gilt)', color: 'var(--midnight)', border: 'none', borderRadius: '8px', padding: '16px 36px', fontSize: '15px', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.02em', textDecoration: 'none' }}>Book a shoot</a>
-          <a href="/packages" style={{ display: 'inline-block', background: 'transparent', color: 'var(--linen)', border: '0.5px solid rgba(240,236,228,0.25)', borderRadius: '8px', padding: '16px 36px', fontSize: '15px', cursor: 'pointer', letterSpacing: '0.02em', textDecoration: 'none' }}>See packages</a>
+          <a href="/booking" style={{ display: 'inline-block', background: 'var(--gilt)', color: 'var(--midnight)', borderRadius: '8px', padding: '16px 36px', fontSize: '15px', fontWeight: 500, textDecoration: 'none', letterSpacing: '0.02em' }}>Book a shoot</a>
+          <a href="/packages" style={{ display: 'inline-block', background: 'transparent', color: 'var(--linen)', border: '0.5px solid rgba(240,236,228,0.25)', borderRadius: '8px', padding: '16px 36px', fontSize: '15px', textDecoration: 'none', letterSpacing: '0.02em' }}>See all packages</a>
         </div>
         <p style={{ fontSize: '13px', color: 'rgba(240,236,228,0.35)', marginTop: '20px' }}>Lynchburg, VA and surrounding areas · Part 107 certified · Fully insured</p>
       </section>
